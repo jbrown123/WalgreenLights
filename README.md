@@ -68,12 +68,10 @@ There is also a failsafe in the system that if you do not see any input for appr
 
 At startup, the master sends 10 sets of "off" packets.  It appears that if a board has no current state, it simply consumes a packet and does not send anything.  You can see this in the following capture.  Each white bar represents an entire packet.  I zoomed out so you can see the cascade of the first three bulbs as packets are being sent.
 
-
-### Startup packet sequence
+## New Controller
 
 After discovering the basics of the protocol, I quickly created an Arduio program to simulate the protocol and started controlling the string myself.  Since the Arduino doesn't directly support this protocol I had to bit bang the line.  My ultimate goal is to be able to run multiple strings of lights from a single Arduino.  Since the times are so short (as small as a single microsecond) I had to disable interrupts during the packet transmission.
 
-Source code for a class implementing the protocol and a quick test program is available in github.
+### Interpacket gap
 
-## Interpacket gap
 The default firmware waits about 1.13 ms between sending packets.  This gives more than enough time for a packet to propagate all the way to the end of the strand.  This seemed wasteful to me so I shortened the gap to 100 us.  It seems to work just fine.
