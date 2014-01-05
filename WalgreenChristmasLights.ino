@@ -51,54 +51,6 @@ class WalgreenLights
       delayMicroseconds(100);
     }
 
-    /*
-// Macros To Speed Up Read/Writes
-// from http://skpang.co.uk/blog/archives/323
-#define Macro_SetPin( pin, state ) ( state == LOW ) ? Macro_SetPinLow( (pin) ) : Macro_SetPinHigh( (pin) )
-#define Macro_SetPinLow( pin )  ( (pin) < 8 ) ? PORTD &= ~( 1 << (pin) ) : PORTB &= ~( 1 << ( (pin) - 8 ) )
-#define Macro_SetPinHigh( pin ) ( (pin) < 8 ) ? PORTD |=  ( 1 << (pin) ) : PORTB |=  ( 1 << ( (pin) - 8 ) )
-
-#define PIN 13
-
-    void OldSendPacket(unsigned char val)
-    {
-      /////////////////////////////////////////////
-      //  **********   WARNING  **********
-      // This code runs with INTERRUPTS DISABLED
-      ////////////////////////////////////////////
-      uint8_t oldSREG = SREG;  // get interrupt register state
-      cli();    // disable interrupts
-
-      // 3 pulses of H 6.25us + L 6.67us 
-      for (int i = 0; i < 3; i++)
-      {
-        Macro_SetPin(PIN, HIGH);
-        delayMicroseconds(6);
-        Macro_SetPin(PIN, LOW);
-        delayMicroseconds(6);
-      }
-      
-      // guess at LSB first
-      for (int i = 0; i < 4; i++)
-      {
-        Macro_SetPin(PIN, HIGH);
-        delayMicroseconds((val & 1) ? 3 : 1);
-        Macro_SetPin(PIN, LOW);
-        delayMicroseconds(2);
-        val >>= 1;
-      }
-
-      SREG = oldSREG;  // restore interrupts
-
-      // hold for at least one full packet time
-      // this allows the downstream neighbor to forward on
-      // his state to the next guy
-      // could be 60us if we wanted to get really tight
-      // 100us seems like plenty
-      // default system waits 1.13ms between packets
-      delayMicroseconds(100);
-    }
-*/
 
     void InitString(void)
     {
